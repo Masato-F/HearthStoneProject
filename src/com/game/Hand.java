@@ -1,0 +1,60 @@
+package com.game;
+
+import com.game.deck.Card;
+
+import java.util.List;
+
+public class Hand {
+
+    private List<Card> cards;
+
+    public Hand() {
+    }
+
+    public Hand(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public void addCardToHand(Card c){
+        cards.add(c);
+    }
+
+    public void removeCardToHand(Card c){
+        cards.remove(c);
+    }
+
+    public void printHand(int cardsNumber){
+        System.out.println("");
+        System.out.print("|");
+        for(int i=0;i<cardsNumber-2;i++){
+            cards.get(i).printActionPointsRequired();
+            System.out.print("||");
+        }
+        cards.get(cardsNumber-1).printActionPointsRequired();
+        System.out.print("|");
+        System.out.println("");
+        System.out.print("|");
+        for(int i=0;i<cardsNumber-2;i++){
+            cards.get(i).printName();
+            System.out.print("||");
+        }
+        System.out.print("|");
+        System.out.println("");
+        System.out.println("");
+        System.out.print("|");
+        for(int i=0;i<cardsNumber-2;i++) {
+            cards.get(i).printAttackAndHealthPoints();
+            System.out.print("||");
+        }
+        System.out.print("|");
+        System.out.println("");
+    }
+}
