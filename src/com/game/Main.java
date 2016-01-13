@@ -30,38 +30,72 @@ public class Main {
         Card gnome = new Card(1, "gnome", 1, 2);
         Card raptor = new Card(2,"Raptor",2,3);
         //Deck 1 and 2
-        List<Card> c = new ArrayList<Card> ();
+        List<Card> c1 = new ArrayList<Card> ();
         for (int i=0;i<10;i++){
-            c.add(gnome);
+            c1.add(gnome);
         }
         List<Card> c2 = new ArrayList<Card> ();
 
         for (int i=0;i<10;i++){
             c2.add(raptor);
         }
-        Deck deck1 = new Deck(c);
+        Deck deck1 = new Deck(c1);
         Deck deck2 = new Deck(c2);
 
         //board creation : empty
         Board board = new Board(hero1,hero2);
-
         board.printBoard();
 
-        Player player1 = new Player(deck2, board.getHero1(), null);
+        //Players creation
+        Player player1 = new Player(deck1, board.getHero1(), null);
         Player player2 = new Player(deck2, board.getHero2(), null);
 
-        int nbCards = deck1.getCards().size();
-
-        int oneCard = (int)(Math.random() * (nbCards));
-
-        Hand hand1 = new Hand(deck1.getCards());
-
+        //Initialisation
+        //Le joueur 1 pioche 3 cartes
+        List<Card> cards1 = new ArrayList<Card> ();
+        cards1 = player1.handInitialisation(player1, 3);
+        Hand hand1 = new Hand(cards1);
         player1.setHand(hand1);
-        player1.getHand().printHand(player1.getHand().getCards().size());
 
+        //Le joueur 2 pioche 4 cartes
+        List<Card> cards2 = new ArrayList<Card> ();
+        cards2 = player2.handInitialisation(player2, 4);
+        Hand hand2 = new Hand(cards2);
+        player2.setHand(hand2);
+
+        //Déroulement du jeu
+        while(player1.getHero().getHpNumber() !=0 || player2.getHero().getHpNumber() !=0){
+            if (Lap.lapNumber < 11){
+                Lap.lapNumber++;
+            }
+            //Tour du joueur 1
+            player1.setActionPoints(Lap.lapNumber);
+            int lapFinished = 0;
+            while (lapFinished == 0){
+
+            }
+
+            //Tour du joueur 2
+
+        }
+
+
+
+        int cardsNumber = deck2.getCards().size();
+        int oneCard = (int)(Math.random() * (cardsNumber));
+
+        //Hand hand1 = new Hand(deck1.getCards());
+
+        //player1.setHand(hand1);
+        player1.getHand().printHand(player1.getHand().getCards().size());
         player1.getHand().addCardToHand(deck2.getCards().get(oneCard));
         player1.getDeck().removeCardToDeck(deck2.getCards().get(oneCard));
         player1.getHand().printHand(player1.getHand().getCards().size());
+
+        player2.getHand().printHand(player2.getHand().getCards().size());
+        player2.getHand().addCardToHand(deck2.getCards().get(oneCard));
+        player2.getDeck().removeCardToDeck(deck2.getCards().get(oneCard));
+        player2.getHand().printHand(player2.getHand().getCards().size());
 
 
 

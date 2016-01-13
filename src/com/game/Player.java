@@ -1,7 +1,10 @@
 package com.game;
+import com.game.deck.Card;
 import com.game.deck.Deck;
 import com.game.heroes.Hero;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -12,6 +15,7 @@ public class Player {
     private Deck deck;
     private Hero hero;
     private Hand hand;
+    private int actionPoints = 0;
 
     public Player(Deck deck, Hero hero, Hand hand) {
         this.deck = deck;
@@ -43,6 +47,14 @@ public class Player {
         this.hand = hand;
     }
 
+    public int getActionPoints() {
+        return actionPoints;
+    }
+
+    public void setActionPoints(int actionPoints) {
+        this.actionPoints = actionPoints;
+    }
+
     public static int chooseClass(int playerNumber) {
         int input = 0;
         while ((input != 1) && (input != 2)) {
@@ -56,5 +68,15 @@ public class Player {
             }
         }
         return input;
+    }
+
+    public List<Card> handInitialisation(Player player, int cardsNumber){
+        List<Card> cards = new ArrayList<Card>();
+        for (int i=0;i<cardsNumber;i++){
+            int oneCard = (int)(Math.random() * (player.getDeck().getCards().size()));
+            cards.add(player.getDeck().getCards().get(oneCard));
+            player.getDeck().removeCardToDeck(player.getDeck().getCards().get(oneCard));
+        }
+        return cards;
     }
 }
