@@ -17,6 +17,7 @@ public class Main {
 
         int hpHero = 10;
 
+
         //Choix des paramètres du duel
             //Player 1 choice
         int input = Player.chooseClass(1);
@@ -34,10 +35,8 @@ public class Main {
             c.add(gnome);
         }
         List<Card> c2 = new ArrayList<Card> ();
-        for (int i=0;i<5;i++){
-            c2.add(gnome);
-        }
-        for (int i=0;i<5;i++){
+
+        for (int i=0;i<10;i++){
             c2.add(raptor);
         }
         Deck deck1 = new Deck(c);
@@ -48,20 +47,21 @@ public class Main {
 
         board.printBoard();
 
-        Player player1 = new Player(deck1, board.getHero1(), null);
+        Player player1 = new Player(deck2, board.getHero1(), null);
         Player player2 = new Player(deck2, board.getHero2(), null);
 
         int nbCards = deck1.getCards().size();
 
-        int oneCard = (int)(Math.random() * (nbCards-0)) + 0;
+        int oneCard = (int)(Math.random() * (nbCards));
 
         Hand hand1 = new Hand(deck1.getCards());
 
         player1.setHand(hand1);
         player1.getHand().printHand(player1.getHand().getCards().size());
 
-        //player1.getHand().addCardToHand(deck1.getCards().get(oneCard));
-        //player1.getDeck().removeCardToDeck(deck1.getCards().remove(oneCard));
+        player1.getHand().addCardToHand(deck2.getCards().get(oneCard));
+        player1.getDeck().removeCardToDeck(deck2.getCards().get(oneCard));
+        player1.getHand().printHand(player1.getHand().getCards().size());
 
 
 
