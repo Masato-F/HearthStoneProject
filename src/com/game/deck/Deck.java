@@ -26,6 +26,7 @@ public class Deck {
     public void createDeck(List<Card> c){
         cards = c;
     }
+
     public void removeCardToDeck(Card c){
         cards.remove(c);
     }

@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by isen on 11/01/2016.
- */
 public class Player {
 
     private Deck deck;
@@ -70,14 +67,15 @@ public class Player {
         return input;
     }
 
-    public List<Card> handInitialisation(Player player, int cardsNumber){
-        List<Card> cards = new ArrayList<Card>();
-        for (int i=0;i<cardsNumber;i++){
-            int oneCard = (int)(Math.random() * (player.getDeck().getCards().size()));
-            cards.add(player.getDeck().getCards().get(oneCard));
-            player.getDeck().removeCardToDeck(player.getDeck().getCards().get(oneCard));
+    public void handInitialisation(int cardsNumber) {
+        List<Card> cards = new ArrayList<Card> ();
+        for (int i = 0; i < cardsNumber; i++) {
+            int oneCard = (int) (Math.random() * (deck.getCards().size()));
+            cards.add(deck.getCards().get(oneCard));
+            deck.removeCardToDeck(deck.getCards().get(oneCard));
         }
-        return cards;
+        Hand hand = new Hand(cards);
+        this.hand = hand;
     }
 
     public void dropACard(){

@@ -1,8 +1,7 @@
 package com.game.deck;
 
-/**
- * Created by isen on 11/01/2016.
- */
+import com.game.heroes.Hero;
+
 public class Card implements CardCharacteristics {
 
     private int actionPointsRequired;
@@ -52,8 +51,6 @@ public class Card implements CardCharacteristics {
         this.name = name;
     }
 
-
-
     public void printActionPointsRequired(){
         System.out.printf("%-15d",actionPointsRequired);
     }
@@ -70,7 +67,16 @@ public class Card implements CardCharacteristics {
     public void printCard(){
         System.out.print("|");
         printActionPointsRequired();
+    }
 
+    public void cardAttacks(Card card, Hero hero){
+        if (card == null){
+            hero.setHpNumber(hero.getHpNumber()-attack);
+        }
+        else{
+            card.setHealthPoints(card.getHealthPoints()-attack);
+            healthPoints =-card.getAttack();
+        }
     }
     @Override
     public void specialEffect() {

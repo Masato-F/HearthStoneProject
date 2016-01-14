@@ -31,31 +31,35 @@ public class Hand {
         cards.remove(c);
     }
 
-    public void printHand(int cardsNumber){
-        System.out.println("");
-        System.out.print("|");
-        for(int i=0;i<cardsNumber-1;i++){
-            cards.get(i).printActionPointsRequired();
-            System.out.print("||");
+    public void printHand(int cardsNumber) {
+        if (cards.size() == 0) {
+            System.out.println("Votre main est vide");
+        } else {
+            System.out.println("Votre main :");
+            System.out.print("|");
+            for (int i = 0; i < cardsNumber - 1; i++) {
+                cards.get(i).printActionPointsRequired();
+                System.out.print("||");
+            }
+            cards.get(cardsNumber - 1).printActionPointsRequired();
+            System.out.print("|");
+            System.out.println("");
+            System.out.print("|");
+            for (int i = 0; i < cardsNumber - 1; i++) {
+                cards.get(i).printName();
+                System.out.print("||");
+            }
+            cards.get(cardsNumber - 1).printName();
+            System.out.print("|");
+            System.out.println("");
+            System.out.print("|");
+            for (int i = 0; i < cardsNumber - 1; i++) {
+                cards.get(i).printAttackAndHealthPoints();
+                System.out.print("||");
+            }
+            cards.get(cardsNumber - 1).printAttackAndHealthPoints();
+            System.out.print("|");
+            System.out.println("");
         }
-        cards.get(cardsNumber-1).printActionPointsRequired();
-        System.out.print("|");
-        System.out.println("");
-        System.out.print("|");
-        for(int i=0;i<cardsNumber-1;i++){
-            cards.get(i).printName();
-            System.out.print("||");
-        }
-        cards.get(cardsNumber-1).printName();
-        System.out.print("|");
-        System.out.println("");
-        System.out.print("|");
-        for(int i=0;i<cardsNumber-1;i++) {
-            cards.get(i).printAttackAndHealthPoints();
-            System.out.print("||");
-        }
-        cards.get(cardsNumber-1).printAttackAndHealthPoints();
-        System.out.print("|");
-        System.out.println("");
     }
 }

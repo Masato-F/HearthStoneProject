@@ -17,7 +17,6 @@ public class Main {
 
         int hpHero = 10;
 
-
         //Choix des paramètres du duel
             //Player 1 choice
         int input = Player.chooseClass(1);
@@ -42,43 +41,41 @@ public class Main {
         Deck deck1 = new Deck(c1);
         Deck deck2 = new Deck(c2);
 
+        //Players creation
+        Player player1 = new Player(deck1, hero1, null);
+        Player player2 = new Player(deck2, hero2, null);
         //board creation : empty
-        Board board = new Board(hero1,hero2);
+        Board board = new Board(player1,player2);
         board.printBoard();
 
-        //Players creation
-        Player player1 = new Player(deck1, board.getHero1(), null);
-        Player player2 = new Player(deck2, board.getHero2(), null);
 
         //Initialisation
         //Le joueur 1 pioche 3 cartes
-        List<Card> cards1 = new ArrayList<Card> ();
-        cards1 = player1.handInitialisation(player1, 3);
-        Hand hand1 = new Hand(cards1);
-        player1.setHand(hand1);
-
+        board.getPlayer1().handInitialisation(3);
         //Le joueur 2 pioche 4 cartes
-        List<Card> cards2 = new ArrayList<Card> ();
-        cards2 = player2.handInitialisation(player2, 4);
-        Hand hand2 = new Hand(cards2);
-        player2.setHand(hand2);
+        board.getPlayer2().handInitialisation(4);
 
         //Déroulement du jeu
 
-        //while(player1.getHero().getHpNumber() !=0 || player2.getHero().getHpNumber() !=0){
+        //while(board.getPlayer1().getHero().getHpNumber() !=0 || board.getPlayer2().getHero().getHpNumber() !=0){
             if (Lap.lapNumber < 11){
                 Lap.lapNumber++;
             }
+            System.out.println("________");
+            System.out.println("|Tour "+Lap.lapNumber+"|");
+            System.out.println("________");
             //Tour du joueur 1
-            player1.setActionPoints(Lap.lapNumber);
-            player1.dropACard();
-            player1.getHand().printHand(player1.getHand().getCards().size());
-            int lapFinished = 0;
+            System.out.println("Tour du joueur1 avec "+Lap.lapNumber+" points d'action");
+            board.getPlayer1().setActionPoints(Lap.lapNumber);
+            board.getPlayer1().dropACard();
+            board.getPlayer1().getHand().printHand(board.getPlayer1().getHand().getCards().size());
+
+            int lapFinished = Lap.askLapFinished();
             while (lapFinished != 1){
-                lapFinished = Lap.askLapFinished(lapFinished);
-                Lap.doAnAction(player1,board);
+                Lap.doAnAction(board.getPlayer1(),board);
                 board.printBoard();
-                player1.getHand().printHand(player1.getHand().getCards().size());
+                board.getPlayer1().getHand().printHand(board.getPlayer1().getHand().getCards().size());
+                lapFinished = Lap.askLapFinished();
             }
 
             //Tour du joueur 2
