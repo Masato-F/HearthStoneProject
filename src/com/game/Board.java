@@ -113,7 +113,7 @@ public class Board {
     public void addCardToBoard(Card c, Hero hero){
         int i =0;
         if (hero == hero1){
-            while ((plateau[i][0].getName() != "") || (i==8)){
+            while ((i<7) && (plateau[i][0].getName() != "")){
 
                 if (plateau[i][0].getName() == null){
                     plateau[i][0] = c;
@@ -124,7 +124,7 @@ public class Board {
             System.out.println("Board plein, vous ne pouvez plus poser de créatures");
         }
         else {
-            while ((plateau[i][1].getName() != "") || (i == 8)) {
+            while ((i<7) && (plateau[i][1].getName() != "")) {
 
                 if (plateau[i][1].getName() == null) {
                     plateau[i][1] = c;
@@ -132,6 +132,7 @@ public class Board {
                 }
                 i++;
             }
+            System.out.println("Board plein, vous ne pouvez plus poser de créatures");
         }
     }
 }

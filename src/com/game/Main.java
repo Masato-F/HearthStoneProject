@@ -64,40 +64,31 @@ public class Main {
         player2.setHand(hand2);
 
         //Déroulement du jeu
-        while(player1.getHero().getHpNumber() !=0 || player2.getHero().getHpNumber() !=0){
+
+        //while(player1.getHero().getHpNumber() !=0 || player2.getHero().getHpNumber() !=0){
             if (Lap.lapNumber < 11){
                 Lap.lapNumber++;
             }
             //Tour du joueur 1
             player1.setActionPoints(Lap.lapNumber);
+            player1.dropACard();
+            player1.getHand().printHand(player1.getHand().getCards().size());
             int lapFinished = 0;
-            while (lapFinished == 0){
-
+            while (lapFinished != 1){
+                lapFinished = Lap.askLapFinished(lapFinished);
+                Lap.doAnAction(player1,board);
+                board.printBoard();
+                player1.getHand().printHand(player1.getHand().getCards().size());
             }
 
             //Tour du joueur 2
 
-        }
+        //}
 
-
-
-        int cardsNumber = deck2.getCards().size();
-        int oneCard = (int)(Math.random() * (cardsNumber));
 
         //Hand hand1 = new Hand(deck1.getCards());
 
         //player1.setHand(hand1);
-        player1.getHand().printHand(player1.getHand().getCards().size());
-        player1.getHand().addCardToHand(deck2.getCards().get(oneCard));
-        player1.getDeck().removeCardToDeck(deck2.getCards().get(oneCard));
-        player1.getHand().printHand(player1.getHand().getCards().size());
-
-        player2.getHand().printHand(player2.getHand().getCards().size());
-        player2.getHand().addCardToHand(deck2.getCards().get(oneCard));
-        player2.getDeck().removeCardToDeck(deck2.getCards().get(oneCard));
-        player2.getHand().printHand(player2.getHand().getCards().size());
-
-
 
         /*
         board.getHero1().heroicPower(2, board, null, null, board.getHero1());

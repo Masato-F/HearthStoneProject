@@ -79,4 +79,19 @@ public class Player {
         }
         return cards;
     }
+
+    public void dropACard(){
+        int cardsNumber = deck.getCards().size();
+        int oneCard = (int)(Math.random() * (cardsNumber));
+
+        int cardsIntheHand = hand.getCards().size();
+        if(cardsIntheHand < 11) {
+            hand.addCardToHand(deck.getCards().get(oneCard));
+            deck.removeCardToDeck(deck.getCards().get(oneCard));
+        }
+        else{
+            System.out.println("Trop de cartes en main, la carte est détruite");
+            deck.removeCardToDeck(deck.getCards().get(oneCard));
+        }
+    }
 }
