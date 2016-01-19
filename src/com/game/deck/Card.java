@@ -18,7 +18,63 @@ public class Card implements CardCharacteristics {
         this.healthPoints = healthPoints;
         this.attack = attack;
     }
+    
+        public static List<Card> loadCard() throws IOException {
+        FileReader file = new FileReader("cardFile.txt");
+        BufferedReader reader = new BufferedReader(file);
+        LineNumberReader count = new LineNumberReader(reader);
+        String line = null;
+        List<Card> cardList = null;
 
+        while((line = count.readLine())!= null){
+            char[] chain = line.toCharArray();
+            Card newCard = new Card();
+            int counter = 0;
+            char[] buffer = new char[0];
+            for(int i=0; i <=chain.length; i++) {
+                if(counter == 2) {
+                    for (int n = 0; n < buffer.length; n++) {
+                        buffer[n] = chain[i];
+                    }
+                }
+                if (chain[i] == ',') {
+                    counter ++;
+                    if (counter == 1 & i == 1) {
+                        int val = Character.getNumericValue(chain[0]);
+                        newCard.actionPointsRequired = val;
+                    }
+
+                    if (counter == 1 & i == 2) {
+                        String s = Character.toString(chain[0]);
+                        s.concat(Character.toString(chain[1]));
+                        int val = Integer.parseInt(s);
+                        newCard.actionPointsRequired = val;
+                    }
+
+                    if(counter == 2){
+                        String name = new String(buffer);
+                        newCard.name=name;
+                    }
+
+                    if(counter == 3){
+                        int val = Character.getNumericValue(chain[i-1]);
+                        newCard.healthPoints = val;
+                    }
+
+                }
+                if( i == chain.length-1){
+                    int val = Character.getNumericValue(chain[chain.length-1]);
+                    newCard.attack = val;
+                }
+            }
+            cardList.add(newCard);
+
+        }
+        return cardList;
+    }
+
+    
+    
     public int getActionPointsRequired() {
         return actionPointsRequired;
     }
